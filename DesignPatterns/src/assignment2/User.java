@@ -1,36 +1,24 @@
 package assignment2;
 
 public abstract class User {
-	protected MessageMediator mediator;
+	protected Messages mediator;
 	protected String name;
-	public User () {
-		
-	}
 
-	public User(MessageMediator med, String name) {
-		this.mediator = med;
-		this.name = name;
-	}
-
-	public abstract void send(String msg, MessageMediator mediator2);
-
-	public MessageMediator getMediator() {
-		return mediator;
-	}
-
-	public void setMediator(MessageMediator mediator) {
+	public void send(String msg, Messages mediator) {
 		this.mediator = mediator;
+		System.out.println(name + " sends: " + msg);
+		mediator.sendMessage(msg, this);
+
+	};
+
+	public void add(Messages mediator) {
+		mediator.addUser(this);
 	}
 
-	public String getName() {
-		return name;
+	public void remove(User user) {
+		mediator.removeUser(this);
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
+	public abstract void receive(String msg, User user);
 
-	public abstract void receive(String msg,User user);
-
-	
 }

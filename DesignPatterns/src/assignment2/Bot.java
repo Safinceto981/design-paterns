@@ -15,24 +15,18 @@ public class Bot extends User {
 		return instance;
 	}
 
-	public Bot(MessageMediator med, String name) {
-		super(med, name);
+	public Bot(String name) {
+		this.name = name;
 		getInstance();
-	}
-
-	@Override
-	public void send(String msg, MessageMediator mediator) {
-		System.out.println(this.getName() + " sends: " + msg);
-		mediator.sendMessage(msg, this);
 	}
 
 	@Override
 	public void receive(String msg, User user) {
 
+		System.out.println(name + " received:" + msg);
 		if (msg == "cat") {
+			System.out.println(user.name);
 
-			super.mediator.removeUser(user);
-			send("The word 'cat'is forbidden", super.mediator);
 		}
 	}
 
